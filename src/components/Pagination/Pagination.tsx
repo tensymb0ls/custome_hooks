@@ -1,18 +1,106 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useSearchParams } from "react-router-dom";
 
 const Pagination = () => {
+  const pagesArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const [page] = useSearchParams();
+  const [activePage, setActivePage] = useState(1);
+
+  useEffect(() => {
+    const pageNumber = page.get("page");
+    if (pageNumber) {
+      setActivePage(parseInt(pageNumber));
+    }
+  }, []);
+
+  const handlePageClick = (pageNumber: number) => {
+    if (pageNumber < 1 || pageNumber > pagesArray.length) {
+      return;
+    }
+    setActivePage(pageNumber);
+  };
   return (
     <div>
-      <Link to={"/people?page=1"}>1</Link>
-      <Link to={"/people?page=2"}>2</Link>
-      <Link to={"/people?page=3"}>3</Link>
-      <Link to={"/people?page=4"}>4</Link>
-      <Link to={"/people?page=5"}>5</Link>
-      <Link to={"/people?page=6"}>6</Link>
-      <Link to={"/people?page=7"}>7</Link>
-      <Link to={"/people?page=8"}>8</Link>
-      <Link to={"/people?page=9"}>9</Link>
+      <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+        <div className="flex flex-1 justify-between sm:hidden">
+          <NavLink
+            to={`/people?page=${activePage - 1}`}
+            onClick={() => handlePageClick(activePage - 1)}
+            className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            Previous
+          </NavLink>
+          <NavLink
+            to={`/people?page=${activePage + 1}`}
+            onClick={() => handlePageClick(activePage + 1)}
+            className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            Next
+          </NavLink>
+        </div>
+        <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-center">
+          <div>
+            <nav
+              className="isolate inline-flex -space-x-px rounded-md shadow-sm"
+              aria-label="Pagination"
+            >
+              <NavLink
+                to={`/people?page=${activePage - 1}`}
+                onClick={() => handlePageClick(activePage - 1)}
+                className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+              >
+                <span className="sr-only">Previous</span>
+                <svg
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </NavLink>
+
+              {pagesArray.map((pageNumber) => (
+                <NavLink
+                  key={pageNumber}
+                  to={`/people?page=${pageNumber}`}
+                  className={
+                    pageNumber === activePage
+                      ? "transition-all relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      : "transition-all relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                  }
+                  onClick={() => handlePageClick(pageNumber)}
+                >
+                  {pageNumber}
+                </NavLink>
+              ))}
+              <NavLink
+                to={`/people?page=${activePage + 1}`}
+                onClick={() => handlePageClick(activePage + 1)}
+                className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+              >
+                <span className="sr-only">Next</span>
+                <svg
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </NavLink>
+            </nav>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
