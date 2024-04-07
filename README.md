@@ -1,4 +1,6 @@
-# Rsbuild Project
+# RTK Query + Custome hooks + Protected Route
+
+## This project uses SWAPI for content data and client-server interaction
 
 ## Setup
 
@@ -20,10 +22,4 @@ Build the app for production:
 
 ```bash
 npm build
-```
-
-Preview the production build locally:
-
-```bash
-pnpm preview
 ```

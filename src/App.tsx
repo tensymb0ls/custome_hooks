@@ -10,7 +10,7 @@ const App = () => {
     description,
     setDescription,
     status,
-    seStatus,
+    setStatus,
     createdAt,
     setCreatedAt,
     handleFormSubmit,
@@ -64,6 +64,8 @@ const App = () => {
                 id="title"
                 name="title"
                 type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset px-[10px] ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
@@ -83,6 +85,8 @@ const App = () => {
                 id="description"
                 name="description"
                 type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset px-[10px] ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
@@ -102,6 +106,8 @@ const App = () => {
                 id="status"
                 name="status"
                 type="text"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset px-[10px] ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
@@ -121,6 +127,8 @@ const App = () => {
                 id="created"
                 name="created"
                 type="text"
+                value={createdAt}
+                onChange={(e) => setCreatedAt(e.target.value)}
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset px-[10px] ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
